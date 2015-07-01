@@ -1,0 +1,11 @@
+//
+//  BookStore-Prefix.pch
+//  BookStore
+//
+//  Created by Anthony MERLE on 01/07/2015.
+//  Copyright (c) 2015 Anthony. All rights reserved.
+//
+
+#import <Overcoat/Overcoat.h>
+
+#define API_BASE_URL	@"http://henri-potier.xebia.fr/"
