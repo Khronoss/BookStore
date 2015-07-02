@@ -9,3 +9,5 @@
 #import <Overcoat/Overcoat.h>
 
 #define API_BASE_URL	@"http://henri-potier.xebia.fr/"
+
+#define WEAKSELF(x) __weak typeof(x) weakSelf = x

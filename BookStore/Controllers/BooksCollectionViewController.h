@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface BooksCollectionViewController : UICollectionViewController
+@interface BooksCollectionViewController : UIViewController <UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout>
 
 @end
