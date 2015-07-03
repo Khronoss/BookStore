@@ -18,7 +18,8 @@ static BSRestClient *sharedClient;
 + (instancetype)sharedClient {
 	static dispatch_once_t onceToken;
 	dispatch_once(&onceToken, ^{
-		sharedClient = [[BSRestClient alloc] initWithBaseURL:[NSURL URLWithString:API_BASE_URL]];
+		NSManagedObjectContext *context = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
+		sharedClient = [[BSRestClient alloc] initWithBaseURL:[NSURL URLWithString:API_BASE_URL] managedObjectContext:context sessionConfiguration:nil];
 	});
 	return sharedClient;
 }

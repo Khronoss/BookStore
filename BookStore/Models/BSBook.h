@@ -6,7 +6,7 @@
 //  Copyright (c) 2015 Anthony. All rights reserved.
 //
 
-@interface BSBook : MTLModel <MTLJSONSerializing>
+@interface BSBook : MTLModel <MTLJSONSerializing, MTLManagedObjectSerializing>
 
 @property (nonatomic, strong) NSString *bookId;
 @property (nonatomic, strong) NSString *title;

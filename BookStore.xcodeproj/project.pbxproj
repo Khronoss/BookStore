@@ -68,6 +68,7 @@
 		92D400371B47228B0085ABBE /* BSCart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BSCart.m; path = Tools/BSCart.m; sourceTree = "<group>"; };
 		92D400391B4727AF0085ABBE /* CommercialOffersViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CommercialOffersViewController.h; path = Controllers/CommercialOffersViewController.h; sourceTree = "<group>"; };
 		92D4003A1B4727AF0085ABBE /* CommercialOffersViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CommercialOffersViewController.m; path = Controllers/CommercialOffersViewController.m; sourceTree = "<group>"; };
+		92D4003C1B473CC90085ABBE /* BookStore 3.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "BookStore 3.xcdatamodel"; sourceTree = "<group>"; };
 		92E90F6E1B45E5EF005F3368 /* BookCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BookCollectionViewCell.h; path = Cells/BookCollectionViewCell.h; sourceTree = "<group>"; };
 		92E90F6F1B45E5EF005F3368 /* BookCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BookCollectionViewCell.m; path = Cells/BookCollectionViewCell.m; sourceTree = "<group>"; };
 		92E90F721B45E624005F3368 /* CardView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CardView.h; path = Views/CardView.h; sourceTree = "<group>"; };
@@ -643,10 +644,11 @@
 		92846E991B435099009CE7C4 /* BookStore.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				92D4003C1B473CC90085ABBE /* BookStore 3.xcdatamodel */,
 				921960DC1B4487B000FB2AA5 /* BookStore 2.xcdatamodel */,
 				92846E9A1B435099009CE7C4 /* BookStore.xcdatamodel */,
 			);
-			currentVersion = 921960DC1B4487B000FB2AA5 /* BookStore 2.xcdatamodel */;
+			currentVersion = 92D4003C1B473CC90085ABBE /* BookStore 3.xcdatamodel */;
 			path = BookStore.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

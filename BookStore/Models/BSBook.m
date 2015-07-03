@@ -10,6 +10,8 @@
 
 @implementation BSBook
 
+#pragma mark - MTLJSONSerializing
+
 + (NSDictionary *)JSONKeyPathsByPropertyKey {
 	return @{
 			 @"bookId": @"isbn",
@@ -17,6 +19,16 @@
 			 @"coverURL": @"cover",
 			 @"price": @"price"
 			 };
+}
+
+#pragma mark - MTLManagedObjectSerializing
+
++ (NSString *)managedObjectEntityName {
+	return @"BSBook";
+}
+
++ (NSDictionary *)managedObjectKeysByPropertyKey {
+	return @{};
 }
 
 @end
