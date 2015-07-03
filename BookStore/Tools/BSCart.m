@@ -7,8 +7,15 @@
 //
 
 #import "BSCart.h"
+#import "BSBook.h"
 
 static NSString * const kCartKey = @"sharedCard";
+
+@interface BSCart ()
+
+@property (nonatomic, strong) NSMutableArray *books;
+
+@end
 
 @implementation BSCart
 
@@ -22,39 +29,54 @@ static BSCart *sharedCart;
 	return sharedCart;
 }
 
-- (void)addBookIdToCart:(NSString*)bookId {
+- (instancetype)init {
+	if (self = [super init]) {
+		NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+		
+		self.books = [userDefaults objectForKey:kCartKey];
+	}
+	return self;
+}
+
+#pragma mark - Books management
+
+- (void)addBookToCart:(NSString*)bookId {
 	NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
 	
-	NSMutableArray *bookIds = [NSMutableArray arrayWithArray:[userDefaults arrayForKey:kCartKey]];
+	[self.books addObject:bookId];
 	
-	[bookIds addObject:bookId];
-	
-	[userDefaults setObject:bookIds forKey:kCartKey];
+	[userDefaults setObject:self.books forKey:kCartKey];
 	[userDefaults synchronize];
 }
 
-- (void)removeBookIdToCart:(NSString*)bookId {
+- (void)removeBookToCart:(NSString*)bookId {
 	NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
 	
-	NSMutableArray *bookIds = [NSMutableArray arrayWithArray:[userDefaults arrayForKey:kCartKey]];
-
-	[bookIds removeObject:bookId];
+	[self.books removeObject:bookId];
 	
-	[userDefaults setObject:bookIds forKey:kCartKey];
+	[userDefaults setObject:self.books forKey:kCartKey];
 	[userDefaults synchronize];
 }
 
-- (NSArray*)savedBookIds {
-	NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-	
-	return [userDefaults arrayForKey:kCartKey];
+- (NSArray*)savedBooks {
+	return [self.books copy];
 }
 
 - (void)removeAllBooks {
 	NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
 	
+	self.books = nil;
 	[userDefaults removeObjectForKey:kCartKey];
 	[userDefaults synchronize];
+}
+
+#pragma mark - Getter and Setter
+
+- (NSMutableArray *)books {
+	if (!_books) {
+		_books = [NSMutableArray array];
+	}
+	return _books;
 }
 
 @end

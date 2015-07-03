@@ -10,9 +10,11 @@
 
 #import "BooksCollectionViewController.h"
 #import "BookCollectionViewCell.h"
+#import "CommercialOffersViewController.h"
 
 #import "BSRestClient.h"
 #import "BSBook.h"
+#import "BSCart.h"
 
 @interface BooksCollectionViewController ()
 
@@ -33,7 +35,11 @@ static NSString * const reuseIdentifier = @"BookCell";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+}
 
+- (void)viewWillAppear:(BOOL)animated {
+	[super viewWillAppear:animated];
+	
 	[self initBooks];
 }
 
@@ -56,6 +62,20 @@ static NSString * const reuseIdentifier = @"BookCell";
 
 - (IBAction)reloadBooks {
 	[self initBooks];
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+	if ([segue.identifier isEqualToString:@"show_buyVC"]) {
+		CommercialOffersViewController *commercialOfferVC = (CommercialOffersViewController*)segue.destinationViewController;
+		
+		CGFloat total;
+		for (BSBook *book in self.books) {
+			if ([[[BSCart sharedCart] savedBooks] containsObject:book.bookId]) {
+				total += [book.price floatValue];
+			}
+		}
+		commercialOfferVC.totalPrice = total;
+	}
 }
 
 #pragma mark <UICollectionViewDataSource>
@@ -104,6 +124,12 @@ static NSString * const reuseIdentifier = @"BookCell";
 	
 	book.selected = !book.selected;
 	
+	if (book.selected) {
+		[[BSCart sharedCart] addBookToCart:book.bookId];
+	} else {
+		[[BSCart sharedCart] removeBookToCart:book.bookId];
+	}
+	
 	[self.collectionView reloadItemsAtIndexPaths:@[indexPath]];
 }
 
@@ -133,6 +159,11 @@ static NSString * const reuseIdentifier = @"BookCell";
 - (void)setBooks:(NSArray *)books {
 	_books = books;
 	
+	BSCart *cart = [BSCart sharedCart];
+	for (BSBook *book in _books) {
+		if ([[cart savedBooks] containsObject:book.bookId])
+			[book setSelected:YES];
+	}
 	[self.collectionView reloadData];
 }
 

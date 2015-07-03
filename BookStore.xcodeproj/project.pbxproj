@@ -21,6 +21,7 @@
 		92846EA61B435099009CE7C4 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 92846EA41B435099009CE7C4 /* LaunchScreen.xib */; };
 		92846EB21B435099009CE7C4 /* BookStoreTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 92846EB11B435099009CE7C4 /* BookStoreTests.m */; };
 		92D400381B47228B0085ABBE /* BSCart.m in Sources */ = {isa = PBXBuildFile; fileRef = 92D400371B47228B0085ABBE /* BSCart.m */; };
+		92D4003B1B4727AF0085ABBE /* CommercialOffersViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 92D4003A1B4727AF0085ABBE /* CommercialOffersViewController.m */; };
 		92E90F701B45E5EF005F3368 /* BookCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 92E90F6F1B45E5EF005F3368 /* BookCollectionViewCell.m */; };
 		92E90F741B45E624005F3368 /* CardView.m in Sources */ = {isa = PBXBuildFile; fileRef = 92E90F731B45E624005F3368 /* CardView.m */; };
 		DCDB4E0DF6961B8EA158327D /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FBCA02516B8E54A7DE22C7D3 /* libPods.a */; };
@@ -65,6 +66,8 @@
 		92846EB11B435099009CE7C4 /* BookStoreTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BookStoreTests.m; sourceTree = "<group>"; };
 		92D400361B47228B0085ABBE /* BSCart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BSCart.h; path = Tools/BSCart.h; sourceTree = "<group>"; };
 		92D400371B47228B0085ABBE /* BSCart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BSCart.m; path = Tools/BSCart.m; sourceTree = "<group>"; };
+		92D400391B4727AF0085ABBE /* CommercialOffersViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CommercialOffersViewController.h; path = Controllers/CommercialOffersViewController.h; sourceTree = "<group>"; };
+		92D4003A1B4727AF0085ABBE /* CommercialOffersViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CommercialOffersViewController.m; path = Controllers/CommercialOffersViewController.m; sourceTree = "<group>"; };
 		92E90F6E1B45E5EF005F3368 /* BookCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BookCollectionViewCell.h; path = Cells/BookCollectionViewCell.h; sourceTree = "<group>"; };
 		92E90F6F1B45E5EF005F3368 /* BookCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BookCollectionViewCell.m; path = Cells/BookCollectionViewCell.m; sourceTree = "<group>"; };
 		92E90F721B45E624005F3368 /* CardView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CardView.h; path = Views/CardView.h; sourceTree = "<group>"; };
@@ -139,8 +142,6 @@
 				92A9909E1B4356D6004C6CE7 /* Models */,
 				92A9909D1B4356CE004C6CE7 /* Controllers */,
 				92A9909C1B4356C4004C6CE7 /* Cells */,
-				92846E961B435099009CE7C4 /* AppDelegate.h */,
-				92846E971B435099009CE7C4 /* AppDelegate.m */,
 				92846E9F1B435099009CE7C4 /* Main.storyboard */,
 				92846E921B435099009CE7C4 /* Supporting Files */,
 			);
@@ -150,6 +151,8 @@
 		92846E921B435099009CE7C4 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				92846E961B435099009CE7C4 /* AppDelegate.h */,
+				92846E971B435099009CE7C4 /* AppDelegate.m */,
 				92846E931B435099009CE7C4 /* Info.plist */,
 				92846EA41B435099009CE7C4 /* LaunchScreen.xib */,
 				92846EA21B435099009CE7C4 /* Images.xcassets */,
@@ -190,6 +193,8 @@
 			children = (
 				921960F11B4499F600FB2AA5 /* BooksCollectionViewController.h */,
 				921960F21B4499F600FB2AA5 /* BooksCollectionViewController.m */,
+				92D400391B4727AF0085ABBE /* CommercialOffersViewController.h */,
+				92D4003A1B4727AF0085ABBE /* CommercialOffersViewController.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -411,6 +416,7 @@
 				921960F31B4499F600FB2AA5 /* BooksCollectionViewController.m in Sources */,
 				921960F61B449B3700FB2AA5 /* BSCommercialOffers.m in Sources */,
 				92846E9B1B435099009CE7C4 /* BookStore.xcdatamodeld in Sources */,
+				92D4003B1B4727AF0085ABBE /* CommercialOffersViewController.m in Sources */,
 				921960DF1B44882000FB2AA5 /* BSBook.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

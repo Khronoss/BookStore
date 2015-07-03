@@ -33,12 +33,12 @@ static BSRestClient *sharedClient;
 	}];
 }
 
-- (void)getOffersForBooks:(NSArray *)books onSuccess:(void (^)(NSArray *books))success onFailure:(void (^)(NSError *error))failure {
+- (void)getOffersForBooks:(NSArray *)books onSuccess:(void (^)(BSCommercialOffers *offers))success onFailure:(void (^)(NSError *error))failure {
 	NSMutableString *booksIds = [NSMutableString string];
-	for (BSBook *book in books) {
+	for (NSString *book in books) {
 		NSString *comma = [booksIds isEqualToString:@""] ? @"" : @",";
 		
-		[booksIds appendFormat:@"%@%@", comma, book.bookId];
+		[booksIds appendFormat:@"%@%@", comma, book];
 	}
 	
 	NSString *urlPath = [NSString stringWithFormat:@"books/%@/commercialOffers", booksIds];
