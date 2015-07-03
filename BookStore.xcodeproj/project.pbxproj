@@ -20,6 +20,7 @@
 		92846EA31B435099009CE7C4 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 92846EA21B435099009CE7C4 /* Images.xcassets */; };
 		92846EA61B435099009CE7C4 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 92846EA41B435099009CE7C4 /* LaunchScreen.xib */; };
 		92846EB21B435099009CE7C4 /* BookStoreTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 92846EB11B435099009CE7C4 /* BookStoreTests.m */; };
+		92D400381B47228B0085ABBE /* BSCart.m in Sources */ = {isa = PBXBuildFile; fileRef = 92D400371B47228B0085ABBE /* BSCart.m */; };
 		92E90F701B45E5EF005F3368 /* BookCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 92E90F6F1B45E5EF005F3368 /* BookCollectionViewCell.m */; };
 		92E90F741B45E624005F3368 /* CardView.m in Sources */ = {isa = PBXBuildFile; fileRef = 92E90F731B45E624005F3368 /* CardView.m */; };
 		DCDB4E0DF6961B8EA158327D /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FBCA02516B8E54A7DE22C7D3 /* libPods.a */; };
@@ -62,6 +63,8 @@
 		92846EAB1B435099009CE7C4 /* BookStoreTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BookStoreTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		92846EB01B435099009CE7C4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		92846EB11B435099009CE7C4 /* BookStoreTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BookStoreTests.m; sourceTree = "<group>"; };
+		92D400361B47228B0085ABBE /* BSCart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BSCart.h; path = Tools/BSCart.h; sourceTree = "<group>"; };
+		92D400371B47228B0085ABBE /* BSCart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BSCart.m; path = Tools/BSCart.m; sourceTree = "<group>"; };
 		92E90F6E1B45E5EF005F3368 /* BookCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BookCollectionViewCell.h; path = Cells/BookCollectionViewCell.h; sourceTree = "<group>"; };
 		92E90F6F1B45E5EF005F3368 /* BookCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BookCollectionViewCell.m; path = Cells/BookCollectionViewCell.m; sourceTree = "<group>"; };
 		92E90F721B45E624005F3368 /* CardView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CardView.h; path = Views/CardView.h; sourceTree = "<group>"; };
@@ -130,6 +133,7 @@
 		92846E911B435099009CE7C4 /* BookStore */ = {
 			isa = PBXGroup;
 			children = (
+				92D400351B4722670085ABBE /* Tools */,
 				92E90F711B45E5FB005F3368 /* Views */,
 				921960E51B448BCD00FB2AA5 /* Client */,
 				92A9909E1B4356D6004C6CE7 /* Models */,
@@ -202,6 +206,15 @@
 				921960F81B449B9B00FB2AA5 /* BSCommercialOffer.m */,
 			);
 			name = Models;
+			sourceTree = "<group>";
+		};
+		92D400351B4722670085ABBE /* Tools */ = {
+			isa = PBXGroup;
+			children = (
+				92D400361B47228B0085ABBE /* BSCart.h */,
+				92D400371B47228B0085ABBE /* BSCart.m */,
+			);
+			name = Tools;
 			sourceTree = "<group>";
 		};
 		92E90F711B45E5FB005F3368 /* Views */ = {
@@ -392,6 +405,7 @@
 				921960F91B449B9B00FB2AA5 /* BSCommercialOffer.m in Sources */,
 				92E90F741B45E624005F3368 /* CardView.m in Sources */,
 				92E90F701B45E5EF005F3368 /* BookCollectionViewCell.m in Sources */,
+				92D400381B47228B0085ABBE /* BSCart.m in Sources */,
 				921960E81B448C0100FB2AA5 /* BSRestClient.m in Sources */,
 				92846E951B435099009CE7C4 /* main.m in Sources */,
 				921960F31B4499F600FB2AA5 /* BooksCollectionViewController.m in Sources */,
