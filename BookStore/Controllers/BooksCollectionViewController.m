@@ -39,12 +39,13 @@ static NSString * const reuseIdentifier = @"BookCell";
     [super viewDidLoad];
 	
 	[self.fetchedResultsController setDelegate:self];
+//	[self refresh];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
 	[super viewWillAppear:animated];
 	
-	[self initBooks];
+	[self refresh];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -56,7 +57,7 @@ static NSString * const reuseIdentifier = @"BookCell";
 	[self setLoading:YES];
 	WEAKSELF(self);
 	[[BSRestClient sharedClient] getBooksOnSuccess:^(NSArray *books) {
-//		[weakSelf setBooks:books];
+		[weakSelf refresh];
 		[weakSelf setLoading:NO];
 	} onFailure:^(NSError *error) {
 		NSLog(@"Error loading books: %@", error);
@@ -89,6 +90,10 @@ static NSString * const reuseIdentifier = @"BookCell";
 	if(![self.fetchedResultsController performFetch:&fetchError]) {
 		NSLog(@"Couldn't fetch:%@", fetchError);
 	}
+	
+	if ([((id<NSFetchedResultsSectionInfo>)[[self.fetchedResultsController sections] firstObject]) numberOfObjects] == 0) {
+		[self initBooks];
+	}
 }
 
 
@@ -116,7 +121,7 @@ static NSString * const reuseIdentifier = @"BookCell";
 	cell.titleLabel.text = book.title;
 	cell.priceLabel.text = [NSString stringWithFormat:@"%@ €", book.price];
 	[cell.bookCoverImageView setImageWithURL:[NSURL URLWithString:book.coverURL] placeholderImage:[UIImage imageNamed:@"book-icon"]];
-	[cell.selectedImageView setHidden:!book.isSelected];
+	[cell.selectedImageView setHidden:![[BSCart sharedCart] isBookInCart:book.bookId]];
     
     return cell;
 }
@@ -138,14 +143,16 @@ static NSString * const reuseIdentifier = @"BookCell";
 */
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-	BSBook *book = [self.books objectAtIndex:indexPath.item];
+	// Configure the cell
+	NSManagedObject *managedObject = [self.fetchedResultsController objectAtIndexPath:indexPath];
+	BSBook *book = [MTLManagedObjectAdapter modelOfClass:[BSBook class]
+									   fromManagedObject:managedObject
+												   error:nil];
 	
-	book.selected = !book.selected;
-	
-	if (book.selected) {
-		[[BSCart sharedCart] addBookToCart:book.bookId];
-	} else {
+	if ([[BSCart sharedCart] isBookInCart:book.bookId]) {
 		[[BSCart sharedCart] removeBookToCart:book.bookId];
+	} else {
+		[[BSCart sharedCart] addBookToCart:book.bookId];
 	}
 	
 	[self.collectionView reloadItemsAtIndexPaths:@[indexPath]];
@@ -174,42 +181,12 @@ static NSString * const reuseIdentifier = @"BookCell";
 
 #pragma mark - NSFetchedResultsControllerDelegate
 
-//- (void)controllerWillChangeContent:(NSFetchedResultsController *)controller {
-//}
+- (void)controllerWillChangeContent:(NSFetchedResultsController *)controller {
+	NSLog(@"willChangeContent");
+}
 
 - (void)controllerDidChangeContent:(NSFetchedResultsController *)controller {
 	[self.collectionView reloadData];
-}
-
-- (void)controller:(NSFetchedResultsController *)controller
-   didChangeObject:(id)anObject
-	   atIndexPath:(NSIndexPath *)indexPath
-	 forChangeType:(NSFetchedResultsChangeType)type
-	  newIndexPath:(NSIndexPath *)newIndexPath {
-	
-	switch (type) {
-		case NSFetchedResultsChangeInsert:
-			[self.books insertObject:anObject atIndex:newIndexPath.row];
-//			[self.tableView insertRowsAtIndexPaths:@[ newIndexPath ] withRowAnimation:UITableViewRowAnimationAutomatic];
-			break;
-			
-		case NSFetchedResultsChangeUpdate:
-			break;
-			
-		case NSFetchedResultsChangeDelete:
-			[self.books removeObject:anObject];
-//			[self.tableView deleteRowsAtIndexPaths:@[ indexPath ] withRowAnimation:UITableViewRowAnimationAutomatic];
-			break;
-			
-		case NSFetchedResultsChangeMove:
-			[self.books removeObject:anObject];
-			[self.books insertObject:anObject atIndex:newIndexPath.row];
-//			[self.tableView moveRowAtIndexPath:indexPath toIndexPath:newIndexPath];
-			break;
-			
-		default:
-			break;
-	}
 }
 
 #pragma mark - Getter and Setter

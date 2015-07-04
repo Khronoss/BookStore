@@ -38,6 +38,10 @@ static BSCart *sharedCart;
 	return self;
 }
 
+- (BOOL)isBookInCart:(NSString *)bookId {
+	return [[self savedBooks] containsObject:bookId];
+}
+
 #pragma mark - Books management
 
 - (void)addBookToCart:(NSString*)bookId {

@@ -28,7 +28,16 @@
 }
 
 + (NSDictionary *)managedObjectKeysByPropertyKey {
-	return @{};
+	return @{
+			 @"bookId": @"bookId",
+			 @"title": @"title",
+			 @"coverURL": @"coverURL",
+			 @"price": @"price"
+			 };
+}
+
++ (NSSet *)propertyKeysForManagedObjectUniquing {
+	return [NSSet setWithObject:@"bookId"];
 }
 
 @end

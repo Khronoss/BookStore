@@ -18,7 +18,8 @@ static BSRestClient *sharedClient;
 + (instancetype)sharedClient {
 	static dispatch_once_t onceToken;
 	dispatch_once(&onceToken, ^{
-		NSManagedObjectContext *context = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
+		NSManagedObjectContext *context = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSMainQueueConcurrencyType];
+		context.persistentStoreCoordinator = [OVCManagedStore managedStoreWithCacheName:@"BookStore_Xebia"].persistentStoreCoordinator;
 		sharedClient = [[BSRestClient alloc] initWithBaseURL:[NSURL URLWithString:API_BASE_URL] managedObjectContext:context sessionConfiguration:nil];
 	});
 	return sharedClient;

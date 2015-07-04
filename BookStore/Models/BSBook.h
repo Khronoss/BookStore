@@ -13,6 +13,4 @@
 @property (nonatomic, strong) NSString *coverURL;
 @property (nonatomic, strong) NSNumber *price;
 
-@property (nonatomic, getter=isSelected) BOOL selected;
-
 @end

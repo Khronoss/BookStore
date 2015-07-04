@@ -8,11 +8,11 @@
 
 #import <Foundation/Foundation.h>
 
-@class BSBook;
-
 @interface BSCart : NSObject
 
 + (instancetype)sharedCart;
+
+- (BOOL)isBookInCart:(NSString*)bookId;
 
 #pragma mark - Books management
 - (void)addBookToCart:(NSString*)bookId;
