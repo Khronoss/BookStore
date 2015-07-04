@@ -218,6 +218,7 @@
                         <outlet property="collectionView" destination="5Su-8y-SEJ" id="c2I-f7-Voa"/>
                         <outlet property="errorView" destination="qHF-57-131" id="sxe-uy-bog"/>
                         <outlet property="loadingView" destination="5UU-gB-dwY" id="sri-7k-e9Y"/>
+                        <outlet property="showOfferButton" destination="lX6-xY-jVp" id="HjI-Rj-0Ji"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CWc-cy-NKV" userLabel="First Responder" sceneMemberID="firstResponder"/>

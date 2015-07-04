@@ -10,4 +10,6 @@
 
 @interface BooksCollectionViewController : UIViewController <UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, NSFetchedResultsControllerDelegate>
 
+- (void)reloadCollection;
+
 @end

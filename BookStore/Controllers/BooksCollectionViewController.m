@@ -7,6 +7,7 @@
 //
 
 #import <UIImageView+AFNetworking.h>
+#import <SDWebImage/UIImageView+WebCache.h>
 
 #import "BooksCollectionViewController.h"
 #import "BookCollectionViewCell.h"
@@ -21,10 +22,9 @@
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 @property (weak, nonatomic) IBOutlet UIView *errorView;
 @property (weak, nonatomic) IBOutlet UIView *loadingView;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *showOfferButton;
 
 @property (nonatomic, strong) NSFetchedResultsController *fetchedResultsController;
-
-@property (nonatomic, strong) NSMutableArray *books;
 
 @property (nonatomic, getter=isLoading) BOOL loading;
 @property (nonatomic, getter=hasLoadError) BOOL loadError;
@@ -38,8 +38,9 @@ static NSString * const reuseIdentifier = @"BookCell";
 - (void)viewDidLoad {
     [super viewDidLoad];
 	
+	[self.showOfferButton setEnabled:NO];
+	
 	[self.fetchedResultsController setDelegate:self];
-//	[self refresh];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -73,14 +74,25 @@ static NSString * const reuseIdentifier = @"BookCell";
 	if ([segue.identifier isEqualToString:@"show_buyVC"]) {
 		CommercialOffersViewController *commercialOfferVC = (CommercialOffersViewController*)segue.destinationViewController;
 		
+		id<NSFetchedResultsSectionInfo> sectionInfo = [[self.fetchedResultsController sections] firstObject];
+
 		CGFloat total;
-		for (BSBook *book in self.books) {
+		for (NSManagedObject *managedBook in [sectionInfo objects]) {
+			BSBook *book = [MTLManagedObjectAdapter modelOfClass:[BSBook class]
+											   fromManagedObject:managedBook
+														   error:nil];
 			if ([[[BSCart sharedCart] savedBooks] containsObject:book.bookId]) {
 				total += [book.price floatValue];
 			}
 		}
 		commercialOfferVC.totalPrice = total;
 	}
+}
+
+- (void)reloadCollection {
+	[self.collectionView reloadData];
+	
+	[self.showOfferButton setEnabled:([[[BSCart sharedCart] savedBooks] count] > 0)];
 }
 
 #pragma mark - Core Data Part
@@ -120,7 +132,7 @@ static NSString * const reuseIdentifier = @"BookCell";
 	
 	cell.titleLabel.text = book.title;
 	cell.priceLabel.text = [NSString stringWithFormat:@"%@ €", book.price];
-	[cell.bookCoverImageView setImageWithURL:[NSURL URLWithString:book.coverURL] placeholderImage:[UIImage imageNamed:@"book-icon"]];
+	[cell.bookCoverImageView sd_setImageWithURL:[NSURL URLWithString:book.coverURL] placeholderImage:[UIImage imageNamed:@"book-icon"]];
 	[cell.selectedImageView setHidden:![[BSCart sharedCart] isBookInCart:book.bookId]];
     
     return cell;
@@ -156,6 +168,7 @@ static NSString * const reuseIdentifier = @"BookCell";
 	}
 	
 	[self.collectionView reloadItemsAtIndexPaths:@[indexPath]];
+	[self.showOfferButton setEnabled:([[[BSCart sharedCart] savedBooks] count] > 0)];
 }
 
 /*
@@ -186,27 +199,10 @@ static NSString * const reuseIdentifier = @"BookCell";
 }
 
 - (void)controllerDidChangeContent:(NSFetchedResultsController *)controller {
-	[self.collectionView reloadData];
+	[self reloadCollection];
 }
 
 #pragma mark - Getter and Setter
-
-- (NSMutableArray *)books {
-	if (!_books) {
-		_books = [NSMutableArray array];
-	}
-	return _books;
-}
-//- (void)setBooks:(NSArray *)books {
-//	_books = [books mutableCopy];
-//	
-//	BSCart *cart = [BSCart sharedCart];
-//	for (BSBook *book in _books) {
-//		if ([[cart savedBooks] containsObject:book.bookId])
-//			[book setSelected:YES];
-//	}
-//	[self.collectionView reloadData];
-//}
 
 - (void)setLoading:(BOOL)loading {
 	_loading = loading;

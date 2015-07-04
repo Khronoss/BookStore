@@ -30,13 +30,18 @@ PODS:
     - Mantle (~> 1.5)
   - Overcoat/NSURLSession (2.1.1):
     - Overcoat/Core
+  - SDWebImage (3.7.2):
+    - SDWebImage/Core (= 3.7.2)
+  - SDWebImage/Core (3.7.2)
 
 DEPENDENCIES:
   - Overcoat (~> 2.0)
+  - SDWebImage (~> 3.7)
 
 SPEC CHECKSUMS:
   AFNetworking: 05edc0ac4c4c8cf57bcf4b84be5b0744b6d8e71e
   Mantle: 60acd0cd363e27d945bda0a6b8e90577112d28f3
   Overcoat: a8d02b26f11e72ca10b4d8d786f6df83b3277b28
+  SDWebImage: 71b7cdc1d1721d6a82ed62889030225f2c249e29
 
 COCOAPODS: 0.35.0.rc1

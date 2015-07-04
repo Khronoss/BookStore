@@ -7,6 +7,7 @@
 //
 
 #import "CommercialOffersViewController.h"
+#import "BooksCollectionViewController.h"
 
 #import "BSRestClient.h"
 #import "BSBook.h"
@@ -59,9 +60,9 @@
 
 - (void)displayBestOffer {
 	BSCommercialOffer *bestOffer = nil;
-	CGFloat bestOfferPrice = 0.0f;
+	CGFloat bestOfferPrice = MAXFLOAT;
 	for (BSCommercialOffer *offer in self.offers.offers) {
-		if ([offer priceWithOffer:self.totalPrice] > bestOfferPrice) {
+		if ([offer priceWithOffer:self.totalPrice] < bestOfferPrice) {
 			bestOffer = offer;
 			bestOfferPrice = [offer priceWithOffer:self.totalPrice];
 		}
@@ -82,6 +83,9 @@
 	[[BSCart sharedCart] removeAllBooks];
 	
 	[self.navigationController popViewControllerAnimated:YES];
+
+	BooksCollectionViewController *rootViewController = [self.navigationController.viewControllers firstObject];
+	[rootViewController reloadCollection];
 }
 
 #pragma mark - Getter and Setter
