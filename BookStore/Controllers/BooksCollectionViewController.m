@@ -41,6 +41,7 @@ static NSString * const reuseIdentifier = @"BookCell";
 	[self.showOfferButton setEnabled:NO];
 	
 	[self.fetchedResultsController setDelegate:self];
+	[self.showOfferButton setEnabled:([[[BSCart sharedCart] savedBooks] count] > 0)];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -76,7 +77,7 @@ static NSString * const reuseIdentifier = @"BookCell";
 		
 		id<NSFetchedResultsSectionInfo> sectionInfo = [[self.fetchedResultsController sections] firstObject];
 
-		CGFloat total;
+		CGFloat total = 0;
 		for (NSManagedObject *managedBook in [sectionInfo objects]) {
 			BSBook *book = [MTLManagedObjectAdapter modelOfClass:[BSBook class]
 											   fromManagedObject:managedBook
@@ -91,8 +92,6 @@ static NSString * const reuseIdentifier = @"BookCell";
 
 - (void)reloadCollection {
 	[self.collectionView reloadData];
-	
-	[self.showOfferButton setEnabled:([[[BSCart sharedCart] savedBooks] count] > 0)];
 }
 
 #pragma mark - Core Data Part

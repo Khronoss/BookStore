@@ -33,7 +33,7 @@ static BSCart *sharedCart;
 	if (self = [super init]) {
 		NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
 		
-		self.books = [userDefaults objectForKey:kCartKey];
+		_books = [[userDefaults arrayForKey:kCartKey] mutableCopy];
 	}
 	return self;
 }
